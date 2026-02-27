@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap');
+
+body{
+background:#fff5f7;
+font-family:'Poppins', Arial, Helvetica, sans-serif;
+animation: fadePage .6s ease;
+}
+
+/* logo */
+
+.salon-title{
+font-family:'Playfair Display', serif;
+font-style:italic;
+font-weight:400;
+font-size:22px;
+letter-spacing:1px;
+}
+
+/* animación al cargar la página */
+
+@keyframes fadePage{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* carousel */
+
+.banner{
+height:350px;
+object-fit:cover;
+border-radius:10px;
+}
+
+/* cards */
+
+.card-body{
+display:flex;
+flex-direction:column;
+}
+
+.product-card{
+border:none;
+border-radius:14px;
+overflow:hidden;
+transition:all .3s ease;
+animation:fadeUp .6s ease;
+}
+
+.product-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 15px 35px rgba(255,182,193,0.4);
+}
+
+/* animación de entrada */
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* contenedor de imagen vertical */
+
+.img-container{
+width:100%;
+}
+
+.img-container img{
+width:100%;
+height:auto;
+display:block;
+}
+
+/* zoom suave en imagen */
+
+.product-card:hover img{
+transform:scale(1.05);
+}
+
+/* precio */
+
+.price{
+font-weight:700;
+font-size:18px;
+color:#e91e63;
+margin-top:10px;
+}
+
+/* botón */
+
+.btn-dark{
+transition:all .25s ease;
+border-radius:8px;
+}
+
+.btn-dark:hover{
+transform:scale(1.05);
+background:#000;
+}
+
+/* carrito */
+
+.cart-panel{
+position:fixed;
+top:0;
+right:0;
+width:320px;
+height:100vh;
+background:white;
+padding:20px;
+box-shadow:-5px 0 20px rgba(0,0,0,.15);
+z-index:1000;
+overflow:auto;
+animation:slideCart .35s ease;
+}
+
+@keyframes slideCart{
+from{
+transform:translateX(100%);
+}
+to{
+transform:translateX(0);
+}
+}
+
+.cart-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.35);
+z-index:999;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+border-bottom:1px solid #eee;
+padding-bottom:5px;
+}
+
+/* badge carrito */
+
+.cart-badge{
+position:absolute;
+top:-5px;
+right:-8px;
+animation:pop .3s ease;
+}
+
+@keyframes pop{
+0%{transform:scale(.5);}
+80%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+/* suscripción navbar */
+
+.subscribe-form input{
+width:160px;
+border-radius:8px;
+}
+
+.subscribe-form input:focus{
+box-shadow:0 0 0 2px rgba(255,105,180,.25);
+border-color:#ff69b4;
+}
+
+.subscribe-form button{
+border-radius:8px;
+font-size:13px;
+}
+
+/* footer */
+
+.footer{
+margin-top:60px;
+background:#ffd1dc;
+padding:40px 20px;
+animation:fadePage .8s ease;
+}
