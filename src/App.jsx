@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import products from "./data/products";
+import axios from "axios";
 
 import Navbar from "./components/Navbar";
 import Carousel from "./components/Carousel";
@@ -9,12 +9,31 @@ import Spinner from "./components/Spinner";
 
 function App() {
 
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    const fetchProducts = async () => {
+      try {
+
+        const res = await axios.get(
+          "http://localhost:5000/api/products"
+        );
+
+        setProducts(res.data);
+
+      } catch (error) {
+        console.error("Error obteniendo productos:", error);
+      }
+    };
+
+    fetchProducts();
+
     setTimeout(() => setLoading(false), 800);
+
   }, []);
 
   const addToCart = (product) => {
@@ -38,13 +57,15 @@ function App() {
 
       <div className="container mt-5">
 
-        <h2 className="mb-4 text-center fw-bold">Nuestros Productos</h2>
+        <h2 className="mb-4 text-center fw-bold">
+          Nuestros Productos
+        </h2>
 
         <div className="row g-4">
 
           {products.map((product) => (
             <div
-              key={product.id}
+              key={product._id}
               className="col-12 col-sm-6 col-md-4 col-lg-3"
             >
               <ProductCard
@@ -63,8 +84,8 @@ function App() {
           className="cart-overlay"
           onClick={() => setShowCart(false)}
         />
-      )}  
-      
+      )}
+
       {showCart && (
         <Cart
           cart={cart}
@@ -74,39 +95,49 @@ function App() {
       )}
 
       <footer className="footer">
-  <div className="container">
-    <div className="row">
 
-      <div className="col-md-6">
-        <h5>Salón Jahzeel</h5>
-        <p>Productos profesionales para el cuidado del cabello.</p>
+        <div className="container">
+          <div className="row">
 
-        <p>
-          Calle 53 296 x 38 y 42 Villas La Hacienda <br />
-          Mérida, Yucatán
-        </p>
+            <div className="col-md-6">
 
-        <p>Tel: 999 129 9460</p>
-      </div>
+              <h5>Salón Jahzeel</h5>
 
-      <div className="col-md-6 text-md-end mt-4 mt-md-0">
+              <p>
+                Productos profesionales para el cuidado del cabello.
+              </p>
 
-        <h6>¡ENCUÉNTRANOS!</h6>
+              <p>
+                Calle 53 296 x 38 y 42 Villas La Hacienda
+                <br />
+                Mérida, Yucatán
+              </p>
 
-        <a
-          href="https://maps.app.goo.gl/wvZ4S17kWv4DwZgv5"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-dark"
-        >
-          Ver en Google Maps
-        </a>
+              <p>
+                Tel: 999 129 9460
+              </p>
 
-      </div>
+            </div>
 
-    </div>
-  </div>
-</footer>
+            <div className="col-md-6 text-md-end mt-4 mt-md-0">
+
+              <h6>¡ENCUÉNTRANOS!</h6>
+
+              <a
+                href="https://maps.app.goo.gl/wvZ4S17kWv4DwZgv5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-dark"
+              >
+                Ver en Google Maps
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+
+      </footer>
     </>
   );
 }

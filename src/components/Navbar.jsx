@@ -3,11 +3,30 @@ import logo from "../assets/logo.png";
 
 function Navbar({ cartCount, openCart }) {
   const [email, setEmail] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("¡Te suscribiste a las promociones!");
+  const handleSubmit = async (e) => {
+
+  e.preventDefault();
+
+  try {
+
+    const res = await axios.post(
+      "http://localhost:5000/api/subscriptions",
+      { email }
+    );
+
+    alert(res.data.message);
+
     setEmail("");
-  };
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.message ||
+      "Error al suscribirse"
+    );
+
+  }
+};
   return (
     <nav className="navbar navbar-light bg-white shadow-sm px-4">
     
