@@ -20,7 +20,7 @@ function App() {
       try {
 
         const res = await axios.get(
-          "http://localhost:5000/api/products"
+          "https://salonjahzeelparcial2-1.onrender.com/api/products"
         );
 
         setProducts(res.data);
